@@ -89,7 +89,7 @@ func createUpdate(path string, platform string) {
 	}
 
 	for _, file := range files {
-		if file.IsDir() == false {
+		if !file.IsDir() {
 			continue
 		}
 		if file.Name() == version {
