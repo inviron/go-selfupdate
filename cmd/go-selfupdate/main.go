@@ -25,7 +25,7 @@ type current struct {
 
 func generateSha256(path string) []byte {
 	h := sha256.New()
-	b, err := ioutil.ReadFile(path)
+	b, err := os.ReadFile(path)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -66,7 +66,7 @@ func createUpdate(path string, platform string) {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	err = ioutil.WriteFile(filepath.Join(genDir, platform+".json"), b, 0755)
+	err = os.WriteFile(filepath.Join(genDir, platform+".json"), b, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -75,7 +75,7 @@ func createUpdate(path string, platform string) {
 
 	var buf bytes.Buffer
 	w := gzip.NewWriter(&buf)
-	f, err := ioutil.ReadFile(path)
+	f, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
