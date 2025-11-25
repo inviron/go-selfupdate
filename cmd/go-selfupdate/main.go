@@ -80,10 +80,16 @@ func createUpdate(path string, platform string) {
 		panic(err)
 	}
 	w.Write(f)
-	w.Close() // You must close this first to flush the bytes to the buffer.
-	err = ioutil.WriteFile(filepath.Join(genDir, version, platform+".gz"), buf.Bytes(), 0755)
+	err = w.Close() // You must close this first to flush the bytes to the buffer.
+	if err != nil {
+		panic(err)
+	}
+	err = os.WriteFile(filepath.Join(genDir, version, platform+".gz"), buf.Bytes(), 0755)
+	if err != nil {
+		panic(err)
+	}
 
-	files, err := ioutil.ReadDir(genDir)
+	files, err := os.ReadDir(genDir)
 	if err != nil {
 		fmt.Println(err)
 	}
