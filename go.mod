@@ -1,5 +1,5 @@
-module github.com/inviron/go-selfupdate
+module go-selfupdate
 
-go 1.15
+go 1.19
 
 require github.com/kr/binarydist v0.1.0
