@@ -1,4 +1,4 @@
-module go-selfupdate
+module github.com/inviron/go-selfupdate
 
 go 1.19
 
