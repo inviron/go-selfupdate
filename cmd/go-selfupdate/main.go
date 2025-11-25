@@ -8,7 +8,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -126,7 +125,7 @@ func createUpdate(path string, platform string) {
 		if err := binarydist.Diff(ar, br, patch); err != nil {
 			panic(err)
 		}
-		ioutil.WriteFile(filepath.Join(genDir, file.Name(), version, platform), patch.Bytes(), 0755)
+		os.WriteFile(filepath.Join(genDir, file.Name(), version, platform), patch.Bytes(), 0755)
 	}
 }
 
@@ -176,7 +175,7 @@ func main() {
 	}
 
 	if fi.IsDir() {
-		files, err := ioutil.ReadDir(appPath)
+		files, err := os.ReadDir(appPath)
 		if err == nil {
 			for _, file := range files {
 				createUpdate(filepath.Join(appPath, file.Name()), file.Name())
